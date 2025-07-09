@@ -192,17 +192,23 @@ body {
 }
 
 .btn-secondary {
-    background: rgb(0, 0, 0, 0.2);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(211, 211, 211, 0.3);
+    padding: 17px 40px;
     border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+     letter-spacing: 1.25px;
+    font-size: 15px;
+    transition: all 0.5s ease;
     color: rgb(0, 0, 0);
-    /* border: 2px solid #333; */
 }
 
 .btn-secondary:hover {
+    transform: translateY(-2px);
+    background-color: hsl(0, 0%, 54%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(180, 180, 180) 0px 7px 29px 0px;
     background-color: #333;
     color: white;
 }
@@ -512,17 +518,26 @@ section {
 }
 
 .project-link {
-    padding: 0.5rem 1rem;
-    background-color: #8f6c3b;
-    color: white;
+    padding: 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+    letter-spacing: 1.20px;
+    transition: all 0.5s ease;
+    color: rgb(0, 0, 0);
     text-decoration: none;
-    border-radius: 5px;
-    font-size: 0.9rem;
     transition: background-color 0.3s ease;
 }
 
 .project-link:hover {
-    background-color: #0056b3;
+    transform: translateY(-2px);
+    background-color: hsl(0, 0%, 54%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(180, 180, 180) 0px 7px 29px 0px;
+    background-color: #333;
+    color: white;
 }
 
 /* Contact Section */
