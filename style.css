@@ -184,6 +184,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 50px;
     color: rgb(0, 0, 0);
+    letter-spacing: 1.25px;
 }
 
 .btn-primary:hover {
@@ -198,7 +199,7 @@ body {
     border: 0;
     background-color: white;
     box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
-     letter-spacing: 1.25px;
+    letter-spacing: 1.25px;
     font-size: 15px;
     transition: all 0.5s ease;
     color: rgb(0, 0, 0);
@@ -579,7 +580,7 @@ section {
 }
 
 .contact-item {
-    padding: 1rem;
+    padding: 1.25rem;
     /* background: rgba(255, 255, 255, 0.5);
     border-radius: 20px;
     border: 1px solid rgba(245, 192, 203, 0.3);
@@ -591,10 +592,13 @@ section {
     align-items: center;
     gap: 1rem;
     text-align: left;
+
 }
 
 .contact-item:hover {
     transform: translateY(-5px);
+    text-decoration: none;
+    font-weight: bold;
     /* box-shadow: 0 8px 25px rgba(245, 192, 203, 0.2); */
 }
 
@@ -611,6 +615,8 @@ section {
 .contact-item:hover .contact-icon {
     transform: scale(1.05);
     box-shadow: 0 6px 20px rgba(245, 192, 203, 0.3);
+    font-weight: bold;
+    text-decoration: none;
 }
 
 .contact-text {
@@ -628,7 +634,7 @@ section {
 
 .contact-item a:hover {
     color: #8b6f47;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .contact-item span {
