@@ -505,6 +505,7 @@ body {
 }
 
 .project-item {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
@@ -519,9 +520,67 @@ body {
     border-bottom: 1px solid var(--border);
 }
 
+.dot {
+  width: 8px;
+  aspect-ratio: 1;
+  position: absolute;
+  background-color: var(--text-muted);
+  box-shadow: 0 0 10px var(--text-muted);
+  border-radius: 100px;
+  z-index: 2;
+  animation: moveDot 20s linear infinite;
+}
+
+.dot2 {
+  width: 8px;
+  aspect-ratio: 1;
+  position: absolute;
+  background-color: var(--text-muted);
+  box-shadow: 0 0 10px var(--text-muted);
+  border-radius: 100px;
+  z-index: 2;
+  animation: moveDot 12s linear infinite;
+}
+
+.dot3 {
+  width: 8px;
+  aspect-ratio: 1;
+  position: absolute;
+  background-color: var(--accent);
+  box-shadow: 0 0 10px var(--text-muted);
+  border-radius: 100px;
+  z-index: 2;
+  animation: moveDot 20s linear infinite;
+}
+
+@keyframes moveDot {
+  0% {
+    top: -4px;
+    left: -4px;
+  }
+  35% {
+    top: -4px;
+    left: calc(100% - 4px);
+  }
+  50% {
+    top: calc(100% - 4px);
+    left: calc(100% - 4px);
+  }
+  85% {
+    top: calc(100% - 4px);
+    left: -4px;
+  }
+  100% {
+    top: -4px;
+    left: -4px;
+  }
+}
+
+
 .project-item:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
+    /* border-bottom: none;
+    margin-bottom: 0px;
+    padding-bottom: 10px; */
 }
 
 .project-item:hover {
