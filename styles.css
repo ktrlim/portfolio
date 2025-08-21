@@ -509,7 +509,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
-    padding: var(--space-xl) 0;
+    padding: calc(10% + var(--space-md)) calc(3% + var(--space-md)) calc(10% + var(--space-md)) calc(3% + var(--space-md));
     border-bottom: 1px solid var(--border);
     transition: var(--transition);
     background: var(--bg-primary);
@@ -520,67 +520,150 @@ body {
     border-bottom: 1px solid var(--border);
 }
 
-.dot {
-  width: 8px;
-  aspect-ratio: 1;
-  position: absolute;
-  background-color: var(--text-muted);
-  box-shadow: 0 0 10px var(--text-muted);
-  border-radius: 100px;
-  z-index: 2;
-  animation: moveDot 20s linear infinite;
+/* project item lines */
+.project-item::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    background-color: var(--grid-color);
+    box-shadow: 0 0 10px #ffffff;
+    border-radius: 100px;
+    z-index: 2;
+    right: calc(3% - 2.5px); /* Position dot so its outside the right line */
+    top: calc(10% - 2.5px); /* Position dot so its outside the top line */
+    animation: moveDotInside 20s linear infinite;
+}
+
+@keyframes moveDotInside {
+    0%, 100% {
+        top: calc(10% - 2.5px);
+        right: calc(3% - 2.5px);
+    }
+    35% {
+        top: calc(10% - 2.5px);
+        right: calc(100% - 3% - 2.5px);
+    }
+    50% {
+        top: calc(100% - 10% - 2.5px);
+        right: calc(100% - 3% - 2.5px);
+    }
+    85% {
+        top: calc(100% - 10% - 2.5px);
+        right: calc(3% - 2.5px);
+    }
+}
+
+/* Line elements */
+.project-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Top line */
+.project-item .line-top {
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    top: 10%;
+    left: 0;
+    background-color: var(--grid-color);
+    z-index: 1;
+}
+
+/* Bottom line */
+.project-item .line-bottom {
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    background-color: var(--grid-color);
+    z-index: 1;
+}
+
+/* Left line */
+.project-item .line-left {
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    left: 3%;
+    top: 0;
+    background-color: var(--grid-color);
+    z-index: 1;
+}
+
+/* Right line */
+.project-item .line-right {
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    right: 3%;
+    top: 0;
+    background-color: var(--grid-color);
+    z-index: 1;
+}
+
+.dot1 {
+    width: 8px;
+    aspect-ratio: 1;
+    position: absolute;
+    background-color: var(--grid-color);
+    box-shadow: 0 0 10px var(--grid-color);
+    border-radius: 100px;
+    z-index: 2;
+    animation: moveDot 20s linear infinite;
 }
 
 .dot2 {
-  width: 8px;
-  aspect-ratio: 1;
-  position: absolute;
-  background-color: var(--text-muted);
-  box-shadow: 0 0 10px var(--text-muted);
-  border-radius: 100px;
-  z-index: 2;
-  animation: moveDot 12s linear infinite;
+    width: 8px;
+    aspect-ratio: 1;
+    position: absolute;
+    background-color: var(--grid-color);
+    box-shadow: 0 0 10px var(--grid-color);
+    border-radius: 100px;
+    z-index: 2;
+    animation: moveDot 12s linear infinite;
 }
 
 .dot3 {
-  width: 8px;
-  aspect-ratio: 1;
-  position: absolute;
-  background-color: var(--accent);
-  box-shadow: 0 0 10px var(--text-muted);
-  border-radius: 100px;
-  z-index: 2;
-  animation: moveDot 20s linear infinite;
+    width: 8px;
+    aspect-ratio: 1;
+    position: absolute;
+    background-color: var(--accent);
+    box-shadow: 0 0 10px var(--grid-color);
+    border-radius: 100px;
+    z-index: 2;
+    animation: moveDot 20s linear infinite;
 }
 
 @keyframes moveDot {
-  0% {
-    top: -4px;
-    left: -4px;
-  }
-  35% {
-    top: -4px;
-    left: calc(100% - 4px);
-  }
-  50% {
-    top: calc(100% - 4px);
-    left: calc(100% - 4px);
-  }
-  85% {
-    top: calc(100% - 4px);
-    left: -4px;
-  }
-  100% {
-    top: -4px;
-    left: -4px;
-  }
-}
-
-
-.project-item:last-child {
-    /* border-bottom: none;
-    margin-bottom: 0px;
-    padding-bottom: 10px; */
+    0% {
+        top: -4px;
+        left: -4px;
+    }
+    35% {
+        top: -4px;
+        left: calc(100% - 4px);
+    }
+    50% {
+        top: calc(100% - 4px);
+        left: calc(100% - 4px);
+    }
+    85% {
+        top: calc(100% - 4px);
+        left: -4px;
+    }
+    100% {
+        top: -4px;
+        left: -4px;
+    }
 }
 
 .project-item:hover {
@@ -596,12 +679,74 @@ body {
 }
 
 .project-image {
-    width: 250px;
-    height: 150px;
-    object-fit: cover;
+    width: 300px;
+    height: 200px;
+    object-fit:scale-down;
     border-radius: 8px;
     border: 1px solid var(--border);
     flex-shrink: 0;
+}
+
+.card {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    background-color: var(--bg-primary);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+    flex-shrink: 0;
+    margin: var(--space-md) var(--space-md) var(--space-md) ;
+}
+
+.card img {
+    object-fit: cover;
+}
+
+.card:hover {
+    transform: rotate(-5deg) scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.card:hover .card-content {
+    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 1;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+    font-weight: 700;
+}
+
+.card-description {
+    margin: 10px 0 0;
+    font-size: 14px;
+    color: #777;
+    line-height: 1.4;
+}
+
+.card:hover svg {
+    scale: 0;
+    transform: rotate(-45deg);
 }
 
 .project-info {
@@ -1014,5 +1159,14 @@ a:focus {
     body {
         background: white;
         color: black;
+    }
+}
+
+@media (max-width: 768px) {
+    .project-item {
+        padding: calc(10% + var(--space-md)) calc(3% + var(--space-md));
+    }
+    .card {
+        display: none;
     }
 }
