@@ -56,7 +56,7 @@ class TypingAnimation {
         this.element = element;
         this.texts = [
             'Software Developer',
-            'Recent Computer Science Graduate',
+            'Computer Science Graduate',
             'Problem Solver',
             'Boba Enthusiast'
         ];
@@ -178,12 +178,12 @@ class NavigationHighlight {
     }
 
     updateActiveNavLink(activeId) {
-        this.navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${activeId}`) {
-                link.classList.add('active');
-            }
-        });
+        // this.navLinks.forEach(link => {
+        //     link.classList.remove('active');
+        //     if (link.getAttribute('href') === `#${activeId}`) {
+        //         link.classList.add('active');
+        //     }
+        // });
     }
 }
 
