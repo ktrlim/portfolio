@@ -95,6 +95,90 @@ class TypingAnimation {
     }
 }
 
+// Experience Progress Bar
+class ExperienceProgressBar {
+    constructor() {
+        this.experienceList = document.querySelector('.experience-list');
+        if (!this.experienceList) return;
+        
+        this.init();
+    }
+
+    init() {
+        // Create dynamic CSS for progress bar
+        this.createProgressStyles();
+        
+        // Bind scroll event with debounce for performance
+        this.boundUpdateProgress = this.debounce(this.updateProgressBar.bind(this), 10);
+        window.addEventListener('scroll', this.boundUpdateProgress);
+        window.addEventListener('resize', this.boundUpdateProgress);
+        
+        // Initialize onload
+        this.updateProgressBar();
+    }
+
+    createProgressStyles() {
+        // Check if styles already exist
+        if (document.getElementById('experience-progress-styles')) return;
+
+        const style = document.createElement('style');
+        style.id = 'experience-progress-styles';
+        style.textContent = `
+            .experience-list::after {
+                height: var(--progress-height, 0%) !important;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    updateProgressBar() {
+        if (!this.experienceList) return;
+
+        const rect = this.experienceList.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        let progress = 0;
+        
+        // If the section hasn't entered the viewport yet
+        if (rect.top > windowHeight) {
+            progress = 0;
+        }
+        // If the section has completely passed the viewport
+        else if (rect.bottom < 0) {
+            progress = 100;
+        }
+        // If the section is currently in view (partially or fully)
+        else {
+            const sectionHeight = rect.height;
+            const scrolledIntoSection = Math.max(0, windowHeight - rect.top);
+            const maxScroll = sectionHeight + windowHeight;
+            progress = Math.min(100, Math.max(0, (scrolledIntoSection / maxScroll) * 100));
+        }
+        
+        // Update CSS custom property
+        document.documentElement.style.setProperty('--progress-height', `${progress}%`);
+    }
+
+    debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    destroy() {
+        if (this.boundUpdateProgress) {
+            window.removeEventListener('scroll', this.boundUpdateProgress);
+            window.removeEventListener('resize', this.boundUpdateProgress);
+        }
+    }
+}
+
 // Smooth Scrolling Navigation
 class SmoothScrolling {
     constructor() {
@@ -143,7 +227,7 @@ class ScrollAnimations {
 
         // Observe elements for animation
         const elementsToObserve = document.querySelectorAll(
-            '.about-content, .project-item, .contact-content'
+            '.about-content, .project-item, .contact-content, .experience-item'
         );
         
         elementsToObserve.forEach(el => {
@@ -213,10 +297,14 @@ class MobileNavigation {
         this.hamburger.setAttribute('aria-label', 'Toggle navigation');
         
         const navContainer = document.querySelector('.nav-container');
-        navContainer.appendChild(this.hamburger);
+        if (navContainer) {
+            navContainer.appendChild(this.hamburger);
+        }
     }
 
     addEventListeners() {
+        if (!this.hamburger) return;
+
         this.hamburger.addEventListener('click', () => {
             this.toggleMenu();
         });
@@ -238,6 +326,7 @@ class MobileNavigation {
         this.navLinks.classList.toggle('active', this.isOpen);
         document.body.classList.toggle('nav-open', this.isOpen);
     }
+
     handleResize() {
         if (window.innerWidth > 768 && this.isOpen) {
             this.toggleMenu();
@@ -265,6 +354,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const smoothScrolling = new SmoothScrolling();
     const scrollAnimations = new ScrollAnimations();
     const navigationHighlight = new NavigationHighlight();
+    
+    // Initialize experience progress bar
+    const experienceProgressBar = new ExperienceProgressBar();
     
     // Initialize typing animation
     const typedTextElement = document.querySelector('.typed-text');
